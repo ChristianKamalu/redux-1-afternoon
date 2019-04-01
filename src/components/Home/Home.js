@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import RecipeCard from "./../RecipeCard/RecipeCard";
 import "./Home.css";
-import store from '../../store';
+import store, {NEW} from '../../store';
 
 class Home extends Component {
   constructor(props) {
@@ -11,6 +11,12 @@ class Home extends Component {
     this.state = {
       recipes: reduxState.recipes
     };
+  }
+
+  handleClick = () => {
+    store.dispatch({
+      type: NEW
+    })
   }
 
   render() {
@@ -30,7 +36,7 @@ class Home extends Component {
     return (
       <div className="Home">
         <Link to="/add/name">
-          <button>Create New Recipe</button>
+          <button onClick={this.handleClick}>Create New Recipe</button>
         </Link>
         <div className="card_container">{recipes}</div>
       </div>
